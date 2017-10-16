@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('angularVacio')
+    .module('employeeList')
     .constant('malarkey', malarkey)
     .constant('moment', moment);
 

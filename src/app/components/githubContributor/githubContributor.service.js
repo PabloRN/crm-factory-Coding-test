@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angularVacio')
+    .module('employeeList')
     .factory('githubContributor', githubContributor);
 
   /** @ngInject */

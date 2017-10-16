@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angularVacio')
+    .module('employeeList')
     .config(config);
 
   /** @ngInject */
