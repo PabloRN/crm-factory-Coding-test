@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-      .module('angularVacio')
+      .module('employeeList')
       .service('webDevTec', webDevTec);
 
   /** @ngInject */

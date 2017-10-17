@@ -1,0 +1,32 @@
+{
+  "employees": [
+    {
+      "name"      : "Jhon Von Jovi",
+      "age"       : 30,
+      "gender"    : "Male",
+      "status"    : "Single",
+      "Profession": "Singer"
+    },
+    {
+      "name"      : "Adam Sandler",
+      "age"       : 35,
+      "gender"    : "Male",
+      "status"    : "Married",
+      "Profession": "Actor"
+    },
+    {
+      "name"      : "Serena Williams",
+      "age"       : 40,
+      "gender"    : "Female",
+      "status"    : "Single",
+      "Profession": "athlete"
+    },
+    {
+      "name"      : "Ronda Rousey",
+      "age"       : 25,
+      "gender"    : "Male",
+      "status"    : "Single",
+      "Profession": "MMA"
+    }
+  ]
+}
