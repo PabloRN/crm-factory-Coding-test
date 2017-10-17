@@ -6,7 +6,7 @@
       "age"       : 30,
       "gender"    : "Male",
       "status"    : "Single",
-      "Profession": "Singer"
+      "profession": "Singer"
     },
     {
       "id"        : 2,
@@ -14,7 +14,7 @@
       "age"       : 35,
       "gender"    : "Male",
       "status"    : "Married",
-      "Profession": "Actor"
+      "profession": "Actor"
     },
     {
       "id"        : 3,
@@ -22,7 +22,7 @@
       "age"       : 40,
       "gender"    : "Female",
       "status"    : "Single",
-      "Profession": "athlete"
+      "profession": "athlete"
     },
     {
       "id"        : 4,
@@ -30,7 +30,7 @@
       "age"       : 25,
       "gender"    : "Male",
       "status"    : "Single",
-      "Profession": "MMA"
+      "profession": "MMA"
     }
   ]
 }

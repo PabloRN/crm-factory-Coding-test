@@ -6,35 +6,25 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController (EmployeesListService, employees) {
+  function MainController (employees, $mdDialog) {
     var vm        = this;
     vm.detailFlag = [];
 
     if (employees) {
       vm.employees = employees;
-
     }
-    vm.showDetails  = showDetails;
-    vm.getEmployees = getEmployees;
-    vm.initFlags    = initFlags;
+    vm.showDetails = showDetails;
+    vm.initFlags   = initFlags;
+    vm.showAlert   = showAlert;
 
     activate();
-    function getEmployees () {
-      EmployeesListService.getEmployees()
-                          .then(function (response) {
-                            vm.employees = response.data.employees;
-
-                          }, function (error) {
-                            $scope.status = 'Unable to load employees data: ' + error.message;
-                          });
-    }
 
     function activate () {
-      getEmployees();
       initFlags()
     }
 
     function showDetails (id) {
+      initFlags();
       if (vm.detailFlag[id] == true) {
         vm.detailFlag[id] = false;
       }
@@ -45,8 +35,21 @@
 
     function initFlags () {
       angular.forEach(vm.employees, function (item) {
-        showDetails(item.id);
+        vm.detailFlag[item.id] = false;
       });
     }
+
+    function showAlert(ev, item) {
+      $mdDialog.show(
+        $mdDialog.alert()
+                 .parent(angular.element(document.querySelector('#popupContainer')))
+                 .clickOutsideToClose(true)
+                 .title('You have clicked on '+ item.name + ' details')
+                 .textContent('Age: ' + item.age + 'years, Gender: ' + item.gender + ', Status: ' + item.status + ', Profession: ' + item.profession)
+                 .ariaLabel('Alert Dialog Demo')
+                 .ok('Got it!')
+                 .targetEvent(ev)
+      );
+    };
   }
 })();

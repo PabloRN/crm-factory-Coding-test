@@ -38,7 +38,7 @@
 }
 
 html {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 [layout=row] {
@@ -59,10 +59,10 @@ md-toolbar.md-default-theme {
 section.jumbotron {
   margin-bottom: 30px;
   padding: 1px 30px;
-  background-color: #5aadbb;
+  background-color: #ffffff;
   text-align: center;
-
-  color: white;
+  border: 1px solid #e5e5e5;
+  color: #333333;
 }
 
 section.jumbotron h1 {
@@ -81,4 +81,17 @@ section.jumbotron h1 {
 .techs md-card img.pull-right {
   float: right;
   width: 100px;
+}
+.cursorHand {
+  cursor : hand;
+}
+
+.sample-show-hide {
+  transition : all 300ms ease-out 50ms;
+}
+:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 0;
 }
