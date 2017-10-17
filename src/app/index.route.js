@@ -12,9 +12,16 @@
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
+        // resolve : {
+        //   employees       : employees
+        //
+        // },
         controllerAs: 'main'
       });
 
+    // function employees(EmployeesListService){
+    //   return EmployeesListService.LoadEmployees();
+    // }
     $urlRouterProvider.otherwise('/');
   }
 

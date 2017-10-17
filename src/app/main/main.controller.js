@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,34 +6,32 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController (EmployeesListService) {
     var vm = this;
-
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1508188097144;
-    vm.showToastr = showToastr;
+    // vm.getEmployees = getEmployees;
 
     activate();
+    // function getEmployees () {
+    //   EmployeesListService.service()
+    //                       .then(function (response) {
+    //                         vm.employees = response;
+    //                         console.log('githubContributor', vm.employees)
+    //                       }, function (error) {
+    //                         $scope.status = 'Unable to load customer data: ' + error.message;
+    //                       });
+    // }
+    EmployeesListService.getEmployees().then(function (response) {
+      vm.employees = response.data.employees;
+      console.log(vm.employees);
 
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
+    });
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
 
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
+    function activate () {
 
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
+
+      // vm.employees      = EmployeesListService.GetData();
+      // console.log('githubContributor', vm.employees)
     }
   }
 })();
