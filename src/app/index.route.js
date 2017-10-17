@@ -12,16 +12,23 @@
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        // resolve : {
-        //   employees       : employees
-        //
-        // },
-        controllerAs: 'main'
+        resolve : {
+          employees       : employees
+
+        },
+        controllerAs: 'vm'
       });
 
-    // function employees(EmployeesListService){
-    //   return EmployeesListService.LoadEmployees();
-    // }
+    function employees(EmployeesListService){
+      var employees = EmployeesListService.getEmployees()
+                          .then(function (response) {
+                            return response.data.employees;
+
+                          }, function (error) {
+                            $scope.status = 'Unable to load employees data: ' + error.message;
+                          });
+      return employees
+    }
     $urlRouterProvider.otherwise('/');
   }
 

@@ -6,29 +6,120 @@
     </header>
 
     <section class="jumbotron">
-      <h1>{{ vm.employees }}</h1>
-      <p class="lead">
-        <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-        Always a pleasure scaffolding your apps.
-      </p>
-      <md-button class="md-raised animated infinite" ng-class="main.classAnimation" ng-click="main.showToastr()">Splendid Toastr</md-button>
-      <p>
-        With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']"></acme-malarkey>
-      </p>
+      <div layout="row" layout-align="space-between start"
+
+           class="padding-top-10 padding-bottom-10">
+        <span flex="100" class="md-subhead">Employee List</span>
+
+      </div>
+      <md-content ng-if="vm.employees.length > 0">
+        <md-list class="md-dense">
+          <md-list-item class="md-2-line flex sample-show-hide"
+                        ng-repeat="item in vm.employees | orderBy: '-name'" flex>
+            <div layout="column" layout-align="center stretch" flex="100">
+              <div ng-click="vm.showDetails(item.id)" layout="row" layout-align="center stretch" flex class="item-list-header padding-left-10 cursorHand">
+                <div flex="20" class="margin-right-20">
+                  <div layout="row" layout-align="center center"
+                       class="mini-ButtonsBusiness" style="padding-left:4px;padding-bottom:5px">
+                    <md-icon palette-color="{{ vm.UrlParseService.mainColorContent }}:{{ vm.UrlParseService.mainColorContentNumber }}"
+                             class="font-size-2 margin-0 side-menu-icon ng-scope md-cyan-theme md-font zmdi zmdi-hotel material-icons"
+                             md-font-icon="zmdi zmdi-hotel" aria-hidden="true"></md-icon>
+                  </div>
+                </div>
+                <div layout="row" flex="80" class="padding-top-10">
+                  <div layout="column" flex>
+                    <span class="md-subhead">{{ item.name }}</span>
+
+                  </div>
+                </div>
+              </div>
+              <md-divider></md-divider>
+              <div ng-show="vm.detailFlag[item.id]" class="sample-show-hide padding-left-20 padding-right-20">
+                <div layout="row" layout-align="">
+                  <!--<div flex="20"></div>-->
+                  <div flex="100" layout="row" layout-align="space-between center">
+                    <div layout="column" layout-align=" stretch"
+                         class="padding-top-10 ">
+                      <span class="md-body-2" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.CHECK-IN' }}">CHECK-IN</span>
+                        <span
+                          class="md-subhead">{{ item.bedroomItem.startDate | date:'dd/MM/yyyy':'UTC' }}</span>
+                    </div>
+                    <div layout="column">
+                      <span class="md-body-2" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.CHECK-OUT' }}">CHECK-OUT</span>
+                      <span class="md-subhead">{{ item.bedroomItem.endDate | date:'dd/MM/yyyy':'UTC' }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div layout="row" class="flex-100">
+                  <!--<div class="flex-20"></div>-->
+                  <div class="flex-100 padding-top-10 " layout="column"
+                       layout-align="stretch">
+                    <span class="md-body-2" translate="{{ 'APP.FRONTEND.TICKET.DIALOGS.GUEST' }}">GUEST</span>
+                    <span class="md-subhead">{{ item.bedroomItem.guestsQuantity }}</span>
+                  </div>
+                  <div ng-if="!item.bedroomName" class="flex-100 padding-top-10 " layout="column"
+                       layout-align="stretch">
+                    <span class="md-body-2" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.ROOM_NUMBER' }}">Number of rooms</span>
+                    <span class="md-subhead">{{ item.bedroomItem.requestedBedrooms}}</span>
+                  </div>
+
+                </div>
+
+                <div class="flex padding-top-10 " layout="column" layout-align="space-around stretch" flex>
+                  <span class="md-body-2" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.ACCOUNT' | uppercase }}">ACCOUNT</span>
+                  <div layout="row" ng-repeat="days in item.daysToPay.daysToPay" flex>
+                    <div layout="row" layout-align="space-between center" flex>
+                      <span class="md-subhead">{{ days.virtualDays }} nights x {{ days.publicPriceInBaseCurrencyChanged }} {{  item.daysToPay.symbol }}</span>
+                      <span class="md-subhead">{{ days.virtualTotalPriceChanged }} {{  item.daysToPay.symbol }}</span>
+                    </div>
+                  </div>
+                  <div layout="row" layout-align="space-between center" flex>
+                    <span class="md-subhead" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.SUBTOTAL' }}">SUBTOTAL:</span>
+                      <span class="md-subhead"> <span
+                        ng-if="item.daysToPay.virtualSubTotalPublicPriceChanged != item.daysToPay.virtualSubTotalPublicPrice">{{ item.daysToPay.virtualSubTotalPublicPriceChanged }} {{ item.daysToPay.symbol }} | </span>
+                            {{ item.daysToPay.virtualSubTotalPublicPrice }} {{ vm.defaultCurrency }}</span>
+                  </div>
+                  <span class="flex margin-top-10" flex></span>
+
+                  <span class="md-body-2" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.DISCOUNT' }}">DISCOUNTS</span>
+
+                  <div layout="row" ng-repeat="days in item.daysToPay.daysToPay" flex>
+                    <div layout="row" layout-align="space-between center" flex>
+                      <span class="md-subhead" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.FOR_MORE_GUESTS' | translate }} {{ days.virtualDiscountForAdditionalGuess }}%"></span>
+                      <span class="md-subhead"> + {{ days.virtualTotalDiscountChanged }} {{ item.daysToPay.symbol }}</span>
+                    </div>
+                  </div>
+                  <div layout="row" layout-align="space-between center" flex>
+                    <span class="md-subhead" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.SUBTOTAL' }}">SUBTOTAL:</span>
+                          <span
+                            class="md-subhead"> <span
+                            ng-if="item.daysToPay.virtualSubtotalDiscountChanged != item.daysToPay.virtualSubtotalDiscount">{{ item.daysToPay.virtualSubtotalDiscountChanged }} {{ item.daysToPay.symbol }} | </span> + {{ item.daysToPay.virtualSubtotalDiscount }} {{ vm.defaultCurrency }}</span>
+                  </div>
+                  <span class="flex margin-top-10" flex></span>
+                  <span class="md-body-2" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.CHARGES' }}">CHARGES</span>
+
+                  <div layout="row" ng-repeat="days in item.daysToPay.daysToPay" flex>
+                    <div layout="row" layout-align="space-between center" flex>
+                      <span ng-if="item.bedroomName" class="md-subhead" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.FOR_LESS_GUESTS' | translate}} {{ days.virtualChargeForLessGuess }}%">For less guests </span>
+                      <span ng-if="!item.bedroomName" class="md-subhead" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.FOR_LESS_ROOMS' | translate}} {{ days.virtualChargeForLessGuess }}%">Cuartos de menos </span>
+                      <span class="md-subhead"> - {{ days.virtualTotalChargeChanged }} {{ item.daysToPay.symbol }}</span>
+                    </div>
+                  </div>
+                  <div layout="row" layout-align="space-between center" flex>
+                    <span class="md-subhead" translate="{{ 'APP.FRONTEND.RESORT_PROFILE.ADD_RESERVATION.SUBTOTAL' }}">SUBTOTAL:</span>
+                          <span
+                            class="md-subhead"><span
+                            ng-if="item.daysToPay.virtualSubtotalChargeChanged != item.daysToPay.virtualSubtotalCharge"> {{ item.daysToPay.virtualSubtotalChargeChanged }} {{ item.daysToPay.symbol }} | </span> - {{ item.daysToPay.virtualSubtotalCharge }} {{ vm.defaultCurrency }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
     </section>
 
-    <div class="techs" layout-align="center">
-      <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-        <md-card-content>
-          <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
-          <h3 class="md-title">{{ awesomeThing.title }}</h3>
-          <p>{{ awesomeThing.description }}</p>
-        </md-card-content>
-        <div class="md-action-buttons">
-          <md-button ng-href="{{ awesomeThing.url }}">Website</md-button>
-        </div>
-      </md-card>
-    </div>
+
   </md-content>
 
 </div>
