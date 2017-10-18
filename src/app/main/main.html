@@ -32,7 +32,7 @@
                 </div>
               </div>
               <md-divider></md-divider>
-              <div ng-show="vm.detailFlag[item.id]" class="md-padding">
+              <div ng-show="vm.showDetail == item.id" class="md-padding">
                 <div class="" layout="row" layout-align="space-between center" flex="100" ng-click="vm.showAlert($event, item)">
                   <div layout="column" flex="50">
                     <div layout="row" layout-align="space-between start">
