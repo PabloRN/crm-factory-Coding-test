@@ -9,10 +9,11 @@
   function MainController (employees, $mdDialog) {
     var vm        = this;
     vm.detailFlag = [];
-
+    /* populating vm.employees with data got from the resolve employees at index.route.js injected */
     if (employees) {
       vm.employees = employees;
     }
+
     vm.showDetails = showDetails;
     vm.initFlags   = initFlags;
     vm.showAlert   = showAlert;
@@ -22,7 +23,7 @@
     function activate () {
       initFlags()
     }
-
+/* function to expands/collapse the items bio details */
     function showDetails (id) {
       initFlags();
       if (vm.detailFlag[id] == true) {
@@ -32,13 +33,13 @@
         vm.detailFlag[id] = true;
       }
     }
-
+    /* function to init flags to determinate if items bio details is expanded or collapsed */
     function initFlags () {
       angular.forEach(vm.employees, function (item) {
         vm.detailFlag[item.id] = false;
       });
     }
-
+    /* function to shows alert when we click on items bio details */
     function showAlert(ev, item) {
       $mdDialog.show(
         $mdDialog.alert()
@@ -50,6 +51,6 @@
                  .ok('Got it!')
                  .targetEvent(ev)
       );
-    };
+    }
   }
 })();
