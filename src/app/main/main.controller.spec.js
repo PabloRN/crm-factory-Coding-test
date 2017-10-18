@@ -2,22 +2,32 @@
   'use strict';
 
   describe('controllers', function(){
-    var vm;
-    var employees;
+    var vm, mdDialog;
+    var employees = ['some', 'mocked', 'products'];
 
 
     beforeEach(module('employeeList'));
     beforeEach(inject(function(_$controller_, _employees_, _$mdDialog_) {
 
-          spyOn(_$mdDialog_, 'show').and.callThrough();
+          spyOn(_$mdDialog_, 'show');
 
-      vm = _$controller_('MainController');
-      $mdDialog = _$mdDialog_;
+      mdDialog.show.and.callFake(function () {
+        return {
+          then: function (callBack) {
+            callBack(true); //return the value to be assigned.
+          }
+        }
+      });
+
+      vm = _$controller_('MainController', {$mdDialog: mdDialog});
+
     }));
 
-    it('should show a Toastr info and stop animation when invoke showToastr()', function() {
-      showAlert();
-      expect($mdDialog.show).toHaveBeenCalled();
+    it('should open a dialog ', function() {
+      vm.showAlert();
+      vm.$digest();
+      expect(mdDialog.show).toHaveBeenCalled();
+      expect(vm.status).toBe(true);
     });
 
     it('should define more than 5 awesome things', function() {
