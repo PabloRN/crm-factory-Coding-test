@@ -66,7 +66,7 @@ gulp build
 ```
 
 ## Built With
-This project was built with angularjs as framework. Using gulp, jasmin and karma to testing. Used jshint for a readable code. For the version control was used github
+This project was built with angularjs as framework. Using gulp, jasmine and karma to testing. Used eslint for a readable code. For the version control was used github
 
 ## Authors
 Pablo Reyes Naranjo
