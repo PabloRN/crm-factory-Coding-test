@@ -2,7 +2,11 @@
 
 ##  Description:
 
-The project shows a employees list from a json file. Each item has an employee name a bio. By default, the bio content is hidden. By clicking on the employee name, the bio content shows. If you click in another employee the item that was open collapse. When you click in item bio the system shows an alert dialog with the employee data.
+The project shows a employees list. Each item has an employee name a bio. By default, the bio content is hidden. By clicking on the employee name, the bio content shows. If you click in another employee the item that was open collapse. When you click in item bio the system shows an alert dialog with the employee data.
+
+##  Technical Description:
+
+The list of employees was created in a json file and a factory was created to access the file using angular $http service (in bigger systems is recomended to use Restangular to access an API).  Using angular ui-router to manage routes in a state machine, was created a resolve that use the $http service to get the employees list and injected it into the controller to later bind the data to the view. 
 
 ## Getting Started:
 
