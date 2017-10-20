@@ -10,8 +10,7 @@
         <span flex="100" class="md-subhead">Employee List</span>
       </div>
       <md-content ng-if="vm.employees.length > 0" layout="row" layout-align="space-between start" flex-xs="100" flex="50">
-        <span hide-xs flex="20"></span>
-        <md-list class="md-dense flex-100">
+        <md-list class="md-dense flex-100 md-padding">
           <md-list-item class="sample-show-hide"
                         ng-repeat="item in vm.employees | orderBy: 'name'" flex>
             <div layout="column" layout-align="center stretch" flex="100">
@@ -61,7 +60,6 @@
             </div>
           </md-list-item>
         </md-list>
-        <span hide-xs flex="20"></span>
       </md-content>
     </section>
   </md-content>
