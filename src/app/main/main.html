@@ -1,6 +1,6 @@
-<div layout="column" layout-align="center center" flex="100">
-
-  <md-content flex="100" style="width: 50%">
+<div layout="row" layout-xs="column" layout-align="space-between center" flex="100">
+  <span hide-xs flex="30"></span>
+  <md-content flex>
     <div class="" layout="column" layout-align="center center" flex="100" style="padding: 20px; background-color: #ffffff; border: 1px solid #e5e5e5;;">
       <img src="assets/images/MCON_logo-2.png">
     </div>
@@ -9,8 +9,8 @@
       <div layout="row" layout-align="space-between start" class="padding-top-10 padding-bottom-10">
         <span flex="100" class="md-subhead">Employee List</span>
       </div>
-      <md-content ng-if="vm.employees.length > 0" layout="row" layout-align="space-between start" flex="50">
-        <span flex="20"></span>
+      <md-content ng-if="vm.employees.length > 0" layout="row" layout-align="space-between start" flex-xs="100" flex="50">
+        <span hide-xs flex="20"></span>
         <md-list class="md-dense flex-100">
           <md-list-item class="sample-show-hide"
                         ng-repeat="item in vm.employees | orderBy: 'name'" flex>
@@ -61,11 +61,9 @@
             </div>
           </md-list-item>
         </md-list>
-        <span flex="20"></span>
+        <span hide-xs flex="20"></span>
       </md-content>
     </section>
-
-
   </md-content>
-
+  <span hide-xs flex="30"></span>
 </div>
