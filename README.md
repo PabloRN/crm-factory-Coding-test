@@ -1,5 +1,7 @@
 ## crm-factory-coding-test
 
+![alt text](https://github.com/PabloRN/crm-factory-Coding-test/blob/master/mcon%20print.png)
+
 ##  Description:
 
 The project shows a employees list. Each item has an employee name and a bio. By default, the bio content is hidden. By clicking on the employee name, the bio content shows. If you click in another employee the item that was open collapse. When you click in item bio the system shows an alert dialog with the employee data.
