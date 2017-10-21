@@ -1,26 +1,35 @@
 (function() {
   'use strict';
 
-  describe('controllers', function(){
-    var vm, mdDialog;
+  describe('Unit test AppController: mdDialog', function () {
+    var ctrl, mdDialog, vm;
 
+    beforeEach(function () {
+      module('employeeList');
+      inject(function ($rootScope, $controller, $mdDialog) {
+        vm = $rootScope.$new();
+        mdDialog = $mdDialog; //keep the reference, for later testing.
 
-    beforeEach(module('employeeList'));
-    beforeEach(inject(function(_$controller_, _$mdDialog_) {
+        spyOn(mdDialog, 'show');
+        mdDialog.show.and.callFake(function () {
+          return {
+            then: function (callBack) {
+              callBack(true); //return the value to be assigned.
+            }
+          }
+        });
 
-          spyOn(_$mdDialog_, 'show');
+        ctrl = $controller('MainController',{$scope:vm, $mdDialog:mdDialog}); //Inject the dependency
 
+      });
+    });
 
-      vm = _$controller_('MainController', {$mdDialog: mdDialog});
-
-    }));
-
-    it('should open a dialog ', function() {
-      vm.showAlert();
+    it(': Opened', function () {
+      vm.showAlert(); //exercise the method.
       vm.$digest();
+
       expect(mdDialog.show).toHaveBeenCalled();
       expect(vm.status).toBe(true);
     });
-
   });
 })();
