@@ -1,35 +1,70 @@
 (function() {
   'use strict';
 
-  describe('Unit test AppController: mdDialog', function () {
-    var ctrl, mdDialog, vm;
+  describe('Unit test AppController: mdDialog', function() {
+    var vm, mdDialog;
+    beforeEach(module('employeeList'));
+    beforeEach(inject(function(_$controller_, $mdDialog) {
+      //keep the reference, for later testing.
+      mdDialog     = $mdDialog;
+      var initData = [
+        {
+          "id"        : 1,
+          "name"      : "Jhon Von Jovi",
+          "age"       : 30,
+          "gender"    : "Male",
+          "status"    : "Single",
+          "profession": "Singer"
+        },
+        {
+          "id"        : 2,
+          "name"      : "Adam Sandler",
+          "age"       : 35,
+          "gender"    : "Male",
+          "status"    : "Married",
+          "profession": "Actor"
+        },
+        {
+          "id"        : 3,
+          "name"      : "Serena Williams",
+          "age"       : 40,
+          "gender"    : "Female",
+          "status"    : "Single",
+          "profession": "athlete"
+        },
+        {
+          "id"        : 4,
+          "name"      : "Ronda Rousey",
+          "age"       : 25,
+          "gender"    : "Male",
+          "status"    : "Single",
+          "profession": "MMA"
+        }
+      ];
 
-    beforeEach(function () {
-      module('employeeList');
-      inject(function ($rootScope, $controller, $mdDialog) {
-        vm = $rootScope.$new();
-        mdDialog = $mdDialog; //keep the reference, for later testing.
-
-        spyOn(mdDialog, 'show');
-        mdDialog.show.and.callFake(function () {
-          return {
-            then: function (callBack) {
-              callBack(true); //return the value to be assigned.
-            }
+      spyOn(mdDialog, 'show');
+      mdDialog.show.and.callFake(function () {
+        return {
+          then: function (callBack) {
+            callBack(true); //return the value to be assigned.
           }
-        });
-
-        ctrl = $controller('MainController',{$scope:vm, $mdDialog:mdDialog}); //Inject the dependency
-
+        }
       });
-    });
 
-    it(': Opened', function () {
-      vm.showAlert(); //exercise the method.
-      vm.$digest();
 
+      vm           = _$controller_('MainController', {employees: initData}, {$mdDialog: mdDialog});
+
+
+    }));
+
+    it(': Opened', function() {
+      var item = vm.employees[0];
+      var ev = '';
+      vm.showAlert(ev, item); //exercise the method.
       expect(mdDialog.show).toHaveBeenCalled();
-      expect(vm.status).toBe(true);
+    });
+    it(': Have get the data', function() {
+      expect(vm.employees.length).toBe(4);
     });
   });
 })();
